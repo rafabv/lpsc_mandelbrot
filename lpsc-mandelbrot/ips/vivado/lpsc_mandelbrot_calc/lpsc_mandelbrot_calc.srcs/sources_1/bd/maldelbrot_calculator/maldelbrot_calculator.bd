@@ -1,0 +1,14 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0x0",
+      "device": "xc7a200tsbg484-1",
+      "gen_directory": "../../../../lpsc_mandelbrot_calc.gen/sources_1/bd/maldelbrot_calculator",
+      "name": "maldelbrot_calculator",
+      "rev_ctrl_bd_flag": "RevCtrlBdOff",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2021.2"
+    },
+    "design_tree": {}
+  }
+}

@@ -1,0 +1,562 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0x38D49CFBB138BB2C",
+      "device": "xc7a200tsbg484-1",
+      "gen_directory": "../../../../lpsc_mandelbrot_calc.gen/sources_1/bd/pixel_calc",
+      "name": "pixel_calc",
+      "rev_ctrl_bd_flag": "RevCtrlBdOff",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2021.2",
+      "validated": "true"
+    },
+    "design_tree": {
+      "xlslice_0": "",
+      "xlconcat_0": "",
+      "xlconstant_0": "",
+      "mult_gen_0": "",
+      "sub": "",
+      "add": "",
+      "mult_gen_1": "",
+      "xlslice_1": "",
+      "xlconcat_1": "",
+      "xlslice_2": "",
+      "mult_gen_2": "",
+      "add1": "",
+      "mult_gen_3": "",
+      "xlslice_3": "",
+      "xlslice_4": "",
+      "xlconcat_2": "",
+      "xlconstant_1": "",
+      "mult_gen_4": ""
+    },
+    "ports": {
+      "Zr": {
+        "type": "data",
+        "direction": "I",
+        "left": "17",
+        "right": "0",
+        "parameters": {
+          "LAYERED_METADATA": {
+            "value": "undef",
+            "value_src": "default"
+          }
+        }
+      },
+      "Zi": {
+        "type": "data",
+        "direction": "I",
+        "left": "17",
+        "right": "0",
+        "parameters": {
+          "LAYERED_METADATA": {
+            "value": "undef",
+            "value_src": "default"
+          }
+        }
+      },
+      "Znr": {
+        "direction": "O",
+        "left": "17",
+        "right": "0",
+        "parameters": {
+          "PortWidth": {
+            "value": "18",
+            "value_src": "ip_prop"
+          }
+        }
+      },
+      "Ci": {
+        "type": "data",
+        "direction": "I",
+        "left": "17",
+        "right": "0",
+        "parameters": {
+          "LAYERED_METADATA": {
+            "value": "undef",
+            "value_src": "default"
+          }
+        }
+      },
+      "Zni": {
+        "direction": "O",
+        "left": "17",
+        "right": "0",
+        "parameters": {
+          "PortWidth": {
+            "value": "18",
+            "value_src": "ip_prop"
+          }
+        }
+      },
+      "Cr": {
+        "type": "data",
+        "direction": "I",
+        "left": "17",
+        "right": "0",
+        "parameters": {
+          "LAYERED_METADATA": {
+            "value": "undef",
+            "value_src": "default"
+          }
+        }
+      }
+    },
+    "components": {
+      "xlslice_0": {
+        "vlnv": "xilinx.com:ip:xlslice:1.0",
+        "xci_name": "pixel_calc_xlslice_0_0",
+        "xci_path": "ip\\pixel_calc_xlslice_0_0\\pixel_calc_xlslice_0_0.xci",
+        "inst_hier_path": "xlslice_0",
+        "parameters": {
+          "DIN_FROM": {
+            "value": "16"
+          },
+          "DIN_TO": {
+            "value": "0"
+          },
+          "DIN_WIDTH": {
+            "value": "18"
+          },
+          "DOUT_WIDTH": {
+            "value": "17"
+          }
+        }
+      },
+      "xlconcat_0": {
+        "vlnv": "xilinx.com:ip:xlconcat:2.1",
+        "xci_name": "pixel_calc_xlconcat_0_0",
+        "xci_path": "ip\\pixel_calc_xlconcat_0_0\\pixel_calc_xlconcat_0_0.xci",
+        "inst_hier_path": "xlconcat_0",
+        "parameters": {
+          "IN0_WIDTH": {
+            "value": "17"
+          },
+          "IN1_WIDTH": {
+            "value": "1"
+          }
+        }
+      },
+      "xlconstant_0": {
+        "vlnv": "xilinx.com:ip:xlconstant:1.1",
+        "xci_name": "pixel_calc_xlconstant_0_0",
+        "xci_path": "ip\\pixel_calc_xlconstant_0_0\\pixel_calc_xlconstant_0_0.xci",
+        "inst_hier_path": "xlconstant_0",
+        "parameters": {
+          "CONST_VAL": {
+            "value": "0"
+          },
+          "CONST_WIDTH": {
+            "value": "1"
+          }
+        }
+      },
+      "mult_gen_0": {
+        "vlnv": "xilinx.com:ip:mult_gen:12.0",
+        "xci_name": "pixel_calc_mult_gen_0_0",
+        "xci_path": "ip\\pixel_calc_mult_gen_0_0\\pixel_calc_mult_gen_0_0.xci",
+        "inst_hier_path": "mult_gen_0",
+        "parameters": {
+          "Multiplier_Construction": {
+            "value": "Use_Mults"
+          },
+          "PipeStages": {
+            "value": "0"
+          }
+        }
+      },
+      "sub": {
+        "vlnv": "xilinx.com:ip:c_addsub:12.0",
+        "xci_name": "pixel_calc_c_addsub_0_0",
+        "xci_path": "ip\\pixel_calc_c_addsub_0_0\\pixel_calc_c_addsub_0_0.xci",
+        "inst_hier_path": "sub",
+        "parameters": {
+          "A_Width": {
+            "value": "36"
+          },
+          "Add_Mode": {
+            "value": "Subtract"
+          },
+          "B_Value": {
+            "value": "000000000000000000000000000000000000"
+          },
+          "B_Width": {
+            "value": "36"
+          },
+          "CE": {
+            "value": "false"
+          },
+          "Latency": {
+            "value": "0"
+          },
+          "Out_Width": {
+            "value": "36"
+          }
+        }
+      },
+      "add": {
+        "vlnv": "xilinx.com:ip:c_addsub:12.0",
+        "xci_name": "pixel_calc_c_addsub_0_1",
+        "xci_path": "ip\\pixel_calc_c_addsub_0_1\\pixel_calc_c_addsub_0_1.xci",
+        "inst_hier_path": "add",
+        "parameters": {
+          "A_Width": {
+            "value": "36"
+          },
+          "Add_Mode": {
+            "value": "Add"
+          },
+          "B_Value": {
+            "value": "000000000000000000000000000000000000"
+          },
+          "B_Width": {
+            "value": "36"
+          },
+          "CE": {
+            "value": "false"
+          },
+          "Latency": {
+            "value": "0"
+          },
+          "Out_Width": {
+            "value": "36"
+          }
+        }
+      },
+      "mult_gen_1": {
+        "vlnv": "xilinx.com:ip:mult_gen:12.0",
+        "xci_name": "pixel_calc_mult_gen_0_1",
+        "xci_path": "ip\\pixel_calc_mult_gen_0_1\\pixel_calc_mult_gen_0_1.xci",
+        "inst_hier_path": "mult_gen_1",
+        "parameters": {
+          "Multiplier_Construction": {
+            "value": "Use_Mults"
+          },
+          "PipeStages": {
+            "value": "0"
+          }
+        }
+      },
+      "xlslice_1": {
+        "vlnv": "xilinx.com:ip:xlslice:1.0",
+        "xci_name": "pixel_calc_xlslice_0_1",
+        "xci_path": "ip\\pixel_calc_xlslice_0_1\\pixel_calc_xlslice_0_1.xci",
+        "inst_hier_path": "xlslice_1",
+        "parameters": {
+          "DIN_FROM": {
+            "value": "23"
+          },
+          "DIN_TO": {
+            "value": "20"
+          },
+          "DIN_WIDTH": {
+            "value": "36"
+          },
+          "DOUT_WIDTH": {
+            "value": "4"
+          }
+        }
+      },
+      "xlconcat_1": {
+        "vlnv": "xilinx.com:ip:xlconcat:2.1",
+        "xci_name": "pixel_calc_xlconcat_0_1",
+        "xci_path": "ip\\pixel_calc_xlconcat_0_1\\pixel_calc_xlconcat_0_1.xci",
+        "inst_hier_path": "xlconcat_1",
+        "parameters": {
+          "IN0_WIDTH": {
+            "value": "4"
+          },
+          "IN1_WIDTH": {
+            "value": "14"
+          }
+        }
+      },
+      "xlslice_2": {
+        "vlnv": "xilinx.com:ip:xlslice:1.0",
+        "xci_name": "pixel_calc_xlslice_1_0",
+        "xci_path": "ip\\pixel_calc_xlslice_1_0\\pixel_calc_xlslice_1_0.xci",
+        "inst_hier_path": "xlslice_2",
+        "parameters": {
+          "DIN_FROM": {
+            "value": "19"
+          },
+          "DIN_TO": {
+            "value": "6"
+          },
+          "DIN_WIDTH": {
+            "value": "36"
+          },
+          "DOUT_WIDTH": {
+            "value": "14"
+          }
+        }
+      },
+      "mult_gen_2": {
+        "vlnv": "xilinx.com:ip:mult_gen:12.0",
+        "xci_name": "pixel_calc_mult_gen_1_0",
+        "xci_path": "ip\\pixel_calc_mult_gen_1_0\\pixel_calc_mult_gen_1_0.xci",
+        "inst_hier_path": "mult_gen_2",
+        "parameters": {
+          "Multiplier_Construction": {
+            "value": "Use_Mults"
+          },
+          "PipeStages": {
+            "value": "0"
+          }
+        }
+      },
+      "add1": {
+        "vlnv": "xilinx.com:ip:c_addsub:12.0",
+        "xci_name": "pixel_calc_add_0",
+        "xci_path": "ip\\pixel_calc_add_0\\pixel_calc_add_0.xci",
+        "inst_hier_path": "add1",
+        "parameters": {
+          "A_Width": {
+            "value": "36"
+          },
+          "Add_Mode": {
+            "value": "Add"
+          },
+          "B_Value": {
+            "value": "000000000000000000000000000000000000"
+          },
+          "B_Width": {
+            "value": "36"
+          },
+          "CE": {
+            "value": "false"
+          },
+          "Latency": {
+            "value": "0"
+          },
+          "Out_Width": {
+            "value": "36"
+          }
+        }
+      },
+      "mult_gen_3": {
+        "vlnv": "xilinx.com:ip:mult_gen:12.0",
+        "xci_name": "pixel_calc_mult_gen_3_0",
+        "xci_path": "ip\\pixel_calc_mult_gen_3_0\\pixel_calc_mult_gen_3_0.xci",
+        "inst_hier_path": "mult_gen_3"
+      },
+      "xlslice_3": {
+        "vlnv": "xilinx.com:ip:xlslice:1.0",
+        "xci_name": "pixel_calc_xlslice_3_0",
+        "xci_path": "ip\\pixel_calc_xlslice_3_0\\pixel_calc_xlslice_3_0.xci",
+        "inst_hier_path": "xlslice_3",
+        "parameters": {
+          "DIN_FROM": {
+            "value": "23"
+          },
+          "DIN_TO": {
+            "value": "20"
+          },
+          "DIN_WIDTH": {
+            "value": "36"
+          },
+          "DOUT_WIDTH": {
+            "value": "4"
+          }
+        }
+      },
+      "xlslice_4": {
+        "vlnv": "xilinx.com:ip:xlslice:1.0",
+        "xci_name": "pixel_calc_xlslice_2_0",
+        "xci_path": "ip\\pixel_calc_xlslice_2_0\\pixel_calc_xlslice_2_0.xci",
+        "inst_hier_path": "xlslice_4",
+        "parameters": {
+          "DIN_FROM": {
+            "value": "19"
+          },
+          "DIN_TO": {
+            "value": "6"
+          },
+          "DIN_WIDTH": {
+            "value": "36"
+          },
+          "DOUT_WIDTH": {
+            "value": "14"
+          }
+        }
+      },
+      "xlconcat_2": {
+        "vlnv": "xilinx.com:ip:xlconcat:2.1",
+        "xci_name": "pixel_calc_xlconcat_1_0",
+        "xci_path": "ip\\pixel_calc_xlconcat_1_0\\pixel_calc_xlconcat_1_0.xci",
+        "inst_hier_path": "xlconcat_2",
+        "parameters": {
+          "IN0_WIDTH": {
+            "value": "4"
+          },
+          "IN1_WIDTH": {
+            "value": "14"
+          }
+        }
+      },
+      "xlconstant_1": {
+        "vlnv": "xilinx.com:ip:xlconstant:1.1",
+        "xci_name": "pixel_calc_xlconstant_1_0",
+        "xci_path": "ip\\pixel_calc_xlconstant_1_0\\pixel_calc_xlconstant_1_0.xci",
+        "inst_hier_path": "xlconstant_1",
+        "parameters": {
+          "CONST_WIDTH": {
+            "value": "18"
+          }
+        }
+      },
+      "mult_gen_4": {
+        "vlnv": "xilinx.com:ip:mult_gen:12.0",
+        "xci_name": "pixel_calc_mult_gen_3_1",
+        "xci_path": "ip\\pixel_calc_mult_gen_3_1\\pixel_calc_mult_gen_3_1.xci",
+        "inst_hier_path": "mult_gen_4",
+        "parameters": {
+          "PipeStages": {
+            "value": "0"
+          }
+        }
+      }
+    },
+    "nets": {
+      "A_0_1": {
+        "ports": [
+          "Zr",
+          "mult_gen_0/A",
+          "mult_gen_0/B",
+          "xlslice_0/Din"
+        ]
+      },
+      "A_0_2": {
+        "ports": [
+          "Ci",
+          "mult_gen_3/A"
+        ]
+      },
+      "A_0_3": {
+        "ports": [
+          "Cr",
+          "mult_gen_4/A"
+        ]
+      },
+      "A_1_1": {
+        "ports": [
+          "Zi",
+          "mult_gen_1/A",
+          "mult_gen_1/B",
+          "mult_gen_2/B"
+        ]
+      },
+      "add1_S": {
+        "ports": [
+          "add1/S",
+          "xlslice_3/Din",
+          "xlslice_4/Din"
+        ]
+      },
+      "add_S": {
+        "ports": [
+          "add/S",
+          "xlslice_1/Din",
+          "xlslice_2/Din"
+        ]
+      },
+      "c_addsub_0_S": {
+        "ports": [
+          "sub/S",
+          "add/A"
+        ]
+      },
+      "mult_gen_0_P": {
+        "ports": [
+          "mult_gen_0/P",
+          "sub/A"
+        ]
+      },
+      "mult_gen_1_P": {
+        "ports": [
+          "mult_gen_1/P",
+          "sub/B"
+        ]
+      },
+      "mult_gen_2_P": {
+        "ports": [
+          "mult_gen_2/P",
+          "add1/A"
+        ]
+      },
+      "mult_gen_3_P": {
+        "ports": [
+          "mult_gen_3/P",
+          "add1/B"
+        ]
+      },
+      "mult_gen_4_P": {
+        "ports": [
+          "mult_gen_4/P",
+          "add/B"
+        ]
+      },
+      "xlconcat_0_dout": {
+        "ports": [
+          "xlconcat_0/dout",
+          "mult_gen_2/A"
+        ]
+      },
+      "xlconcat_1_dout": {
+        "ports": [
+          "xlconcat_1/dout",
+          "Znr"
+        ]
+      },
+      "xlconcat_2_dout": {
+        "ports": [
+          "xlconcat_2/dout",
+          "Zni"
+        ]
+      },
+      "xlconstant_0_dout": {
+        "ports": [
+          "xlconstant_0/dout",
+          "xlconcat_0/In1"
+        ]
+      },
+      "xlconstant_1_dout": {
+        "ports": [
+          "xlconstant_1/dout",
+          "mult_gen_3/B",
+          "mult_gen_4/B"
+        ]
+      },
+      "xlslice_0_Dout": {
+        "ports": [
+          "xlslice_0/Dout",
+          "xlconcat_0/In0"
+        ]
+      },
+      "xlslice_1_Dout": {
+        "ports": [
+          "xlslice_1/Dout",
+          "xlconcat_1/In0"
+        ]
+      },
+      "xlslice_2_Dout": {
+        "ports": [
+          "xlslice_2/Dout",
+          "xlconcat_1/In1"
+        ]
+      },
+      "xlslice_3_Dout": {
+        "ports": [
+          "xlslice_3/Dout",
+          "xlconcat_2/In0"
+        ]
+      },
+      "xlslice_4_Dout": {
+        "ports": [
+          "xlslice_4/Dout",
+          "xlconcat_2/In1"
+        ]
+      }
+    }
+  }
+}
