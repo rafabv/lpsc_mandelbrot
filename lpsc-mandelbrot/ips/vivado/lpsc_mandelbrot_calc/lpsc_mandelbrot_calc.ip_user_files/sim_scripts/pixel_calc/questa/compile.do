@@ -1,33 +1,33 @@
-vlib modelsim_lib/work
-vlib modelsim_lib/msim
+vlib questa_lib/work
+vlib questa_lib/msim
 
-vlib modelsim_lib/msim/xlslice_v1_0_2
-vlib modelsim_lib/msim/xil_defaultlib
-vlib modelsim_lib/msim/xlconcat_v2_1_4
-vlib modelsim_lib/msim/xlconstant_v1_1_7
-vlib modelsim_lib/msim/xbip_utils_v3_0_10
-vlib modelsim_lib/msim/xbip_pipe_v3_0_6
-vlib modelsim_lib/msim/xbip_bram18k_v3_0_6
-vlib modelsim_lib/msim/mult_gen_v12_0_17
-vlib modelsim_lib/msim/c_reg_fd_v12_0_6
-vlib modelsim_lib/msim/xbip_dsp48_wrapper_v3_0_4
-vlib modelsim_lib/msim/xbip_dsp48_addsub_v3_0_6
-vlib modelsim_lib/msim/xbip_addsub_v3_0_6
-vlib modelsim_lib/msim/c_addsub_v12_0_14
+vlib questa_lib/msim/xlslice_v1_0_2
+vlib questa_lib/msim/xil_defaultlib
+vlib questa_lib/msim/xlconcat_v2_1_4
+vlib questa_lib/msim/xlconstant_v1_1_7
+vlib questa_lib/msim/xbip_utils_v3_0_10
+vlib questa_lib/msim/xbip_pipe_v3_0_6
+vlib questa_lib/msim/xbip_bram18k_v3_0_6
+vlib questa_lib/msim/mult_gen_v12_0_17
+vlib questa_lib/msim/c_reg_fd_v12_0_6
+vlib questa_lib/msim/xbip_dsp48_wrapper_v3_0_4
+vlib questa_lib/msim/xbip_dsp48_addsub_v3_0_6
+vlib questa_lib/msim/xbip_addsub_v3_0_6
+vlib questa_lib/msim/c_addsub_v12_0_14
 
-vmap xlslice_v1_0_2 modelsim_lib/msim/xlslice_v1_0_2
-vmap xil_defaultlib modelsim_lib/msim/xil_defaultlib
-vmap xlconcat_v2_1_4 modelsim_lib/msim/xlconcat_v2_1_4
-vmap xlconstant_v1_1_7 modelsim_lib/msim/xlconstant_v1_1_7
-vmap xbip_utils_v3_0_10 modelsim_lib/msim/xbip_utils_v3_0_10
-vmap xbip_pipe_v3_0_6 modelsim_lib/msim/xbip_pipe_v3_0_6
-vmap xbip_bram18k_v3_0_6 modelsim_lib/msim/xbip_bram18k_v3_0_6
-vmap mult_gen_v12_0_17 modelsim_lib/msim/mult_gen_v12_0_17
-vmap c_reg_fd_v12_0_6 modelsim_lib/msim/c_reg_fd_v12_0_6
-vmap xbip_dsp48_wrapper_v3_0_4 modelsim_lib/msim/xbip_dsp48_wrapper_v3_0_4
-vmap xbip_dsp48_addsub_v3_0_6 modelsim_lib/msim/xbip_dsp48_addsub_v3_0_6
-vmap xbip_addsub_v3_0_6 modelsim_lib/msim/xbip_addsub_v3_0_6
-vmap c_addsub_v12_0_14 modelsim_lib/msim/c_addsub_v12_0_14
+vmap xlslice_v1_0_2 questa_lib/msim/xlslice_v1_0_2
+vmap xil_defaultlib questa_lib/msim/xil_defaultlib
+vmap xlconcat_v2_1_4 questa_lib/msim/xlconcat_v2_1_4
+vmap xlconstant_v1_1_7 questa_lib/msim/xlconstant_v1_1_7
+vmap xbip_utils_v3_0_10 questa_lib/msim/xbip_utils_v3_0_10
+vmap xbip_pipe_v3_0_6 questa_lib/msim/xbip_pipe_v3_0_6
+vmap xbip_bram18k_v3_0_6 questa_lib/msim/xbip_bram18k_v3_0_6
+vmap mult_gen_v12_0_17 questa_lib/msim/mult_gen_v12_0_17
+vmap c_reg_fd_v12_0_6 questa_lib/msim/c_reg_fd_v12_0_6
+vmap xbip_dsp48_wrapper_v3_0_4 questa_lib/msim/xbip_dsp48_wrapper_v3_0_4
+vmap xbip_dsp48_addsub_v3_0_6 questa_lib/msim/xbip_dsp48_addsub_v3_0_6
+vmap xbip_addsub_v3_0_6 questa_lib/msim/xbip_addsub_v3_0_6
+vmap c_addsub_v12_0_14 questa_lib/msim/c_addsub_v12_0_14
 
 vlog -work xlslice_v1_0_2  -incr -mfcu \
 "../../../../lpsc_mandelbrot_calc.gen/sources_1/bd/pixel_calc/ipshared/11d0/hdl/xlslice_v1_0_vl_rfs.v" \

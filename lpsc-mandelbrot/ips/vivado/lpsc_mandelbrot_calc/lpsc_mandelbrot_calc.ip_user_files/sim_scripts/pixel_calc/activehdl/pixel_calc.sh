@@ -3,7 +3,7 @@
 # Vivado (TM) v2021.2 (64-bit)
 #
 # Filename    : pixel_calc.sh
-# Simulator   : Mentor Graphics ModelSim Simulator
+# Simulator   : Aldec Active-HDL Simulator
 # Description : Simulation script for compiling, elaborating and verifying the project source files.
 #               The script will automatically create the design libraries sub-directories in the run
 #               directory, add the library logical mappings in the simulator setup file, create default
@@ -54,7 +54,7 @@ compile()
 # RUN_STEP: <simulate>
 simulate()
 {
-  vsim   -c -do "do {simulate.do}" -l simulate.log
+  runvsimsa -l simulate.log -do "do {simulate.do}"
 }
 
 # STEP: setup
@@ -66,7 +66,7 @@ setup()
         echo -e "ERROR: Simulation library directory path not specified (type \"./pixel_calc.sh -help\" for more information)\n"
         exit 1
       fi
-     copy_setup_file $2
+     map_setup_file $2
     ;;
     "-reset_run" )
       reset_run
@@ -77,10 +77,8 @@ setup()
       # do not remove previous data
     ;;
     * )
-     copy_setup_file $2
+     map_setup_file $2
   esac
-
-  create_lib_dir
 
   # Add any setup/initialization commands here:-
 
@@ -88,45 +86,33 @@ setup()
 
 }
 
-# Copy modelsim.ini file
-copy_setup_file()
+# Map library.cfg file
+map_setup_file()
 {
-  file="modelsim.ini"
+  file="library.cfg"
   if [[ ($1 != "") ]]; then
     lib_map_path="$1"
   else
-    lib_map_path="C:/Users/rafae/lspc_mandelbrot/lpsc-mandelbrot/ips/vivado/lpsc_mandelbrot_calc/lpsc_mandelbrot_calc.cache/compile_simlib/modelsim"
+    lib_map_path="C:/Users/rafae/lspc_mandelbrot/lpsc-mandelbrot/ips/vivado/lpsc_mandelbrot_calc/lpsc_mandelbrot_calc.cache/compile_simlib/activehdl"
   fi
   if [[ ($lib_map_path != "") ]]; then
     src_file="$lib_map_path/$file"
-    cp $src_file .
+    if [[ -e $src_file ]]; then
+      vmap -link $lib_map_path
+    fi
   fi
-}
-
-# Create design library directory
-create_lib_dir()
-{
-  lib_dir="modelsim_lib"
-  if [[ -e $lib_dir ]]; then
-    rm -rf $lib_dir
-  fi
-
-  mkdir $lib_dir
-
 }
 
 # Delete generated data from the previous run
 reset_run()
 {
-  files_to_remove=(compile.log elaborate.log simulate.log vsim.wlf modelsim_lib)
+  files_to_remove=(compile.log elaboration.log simulate.log dataset.asdb work activehdl)
   for (( i=0; i<${#files_to_remove[*]}; i++ )); do
     file="${files_to_remove[i]}"
     if [[ -e $file ]]; then
       rm -rf $file
     fi
   done
-
-  create_lib_dir
 }
 
 # Check command line arguments
