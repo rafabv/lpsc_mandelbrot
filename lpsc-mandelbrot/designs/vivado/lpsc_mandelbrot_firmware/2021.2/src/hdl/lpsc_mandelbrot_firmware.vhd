@@ -349,7 +349,7 @@ begin
                  reset           => ResetxR,
                  PllLockedxSO    => PllLockedxS,
                  ClkSys100MhzxCI => ClkSys100MhzBufgxC);
-
+		-- a supprimer le generator d'im
         LpscImageGeneratorxI : entity work.lpsc_image_generator
             generic map (
                 C_DATA_SIZE  => C_DATA_SIZE,
@@ -364,7 +364,7 @@ begin
                 VidOnxSI     => '1',--VidOnxS,  
                 DataxDO      => DataImGen2BramMVxD,--DataImGen2HDMIxD,    --,
                 Color1xDI    => RdDataFlagColor1xDP(((C_PIXEL_SIZE * 3) - 1) downto 0));
-
+		-- lie au generateur d'imag donc a supprimer
          HVCountIntxP : process (all) is
          begin  -- process HVCountxP
 

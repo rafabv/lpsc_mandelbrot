@@ -1,7 +1,7 @@
 --Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2021.2 (win64) Build 3367213 Tue Oct 19 02:48:09 MDT 2021
---Date        : Tue May  3 18:56:07 2022
+--Date        : Tue May 10 19:08:26 2022
 --Host        : RBV running 64-bit major release  (build 9200)
 --Command     : generate_target pixel_calc.bd
 --Design      : pixel_calc
@@ -35,8 +35,8 @@ architecture STRUCTURE of pixel_calc is
   end component pixel_calc_xlslice_0_0;
   component pixel_calc_xlconcat_0_0 is
   port (
-    In0 : in STD_LOGIC_VECTOR ( 16 downto 0 );
-    In1 : in STD_LOGIC_VECTOR ( 0 to 0 );
+    In0 : in STD_LOGIC_VECTOR ( 0 to 0 );
+    In1 : in STD_LOGIC_VECTOR ( 16 downto 0 );
     dout : out STD_LOGIC_VECTOR ( 17 downto 0 )
   );
   end component pixel_calc_xlconcat_0_0;
@@ -81,8 +81,8 @@ architecture STRUCTURE of pixel_calc is
   end component pixel_calc_xlslice_0_1;
   component pixel_calc_xlconcat_0_1 is
   port (
-    In0 : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    In1 : in STD_LOGIC_VECTOR ( 13 downto 0 );
+    In0 : in STD_LOGIC_VECTOR ( 13 downto 0 );
+    In1 : in STD_LOGIC_VECTOR ( 3 downto 0 );
     dout : out STD_LOGIC_VECTOR ( 17 downto 0 )
   );
   end component pixel_calc_xlconcat_0_1;
@@ -127,8 +127,8 @@ architecture STRUCTURE of pixel_calc is
   end component pixel_calc_xlslice_2_0;
   component pixel_calc_xlconcat_1_0 is
   port (
-    In0 : in STD_LOGIC_VECTOR ( 3 downto 0 );
-    In1 : in STD_LOGIC_VECTOR ( 13 downto 0 );
+    In0 : in STD_LOGIC_VECTOR ( 13 downto 0 );
+    In1 : in STD_LOGIC_VECTOR ( 3 downto 0 );
     dout : out STD_LOGIC_VECTOR ( 17 downto 0 )
   );
   end component pixel_calc_xlconcat_1_0;
@@ -233,20 +233,20 @@ sub: component pixel_calc_c_addsub_0_0
     );
 xlconcat_0: component pixel_calc_xlconcat_0_0
      port map (
-      In0(16 downto 0) => xlslice_0_Dout(16 downto 0),
-      In1(0) => xlconstant_0_dout(0),
+      In0(0) => xlconstant_0_dout(0),
+      In1(16 downto 0) => xlslice_0_Dout(16 downto 0),
       dout(17 downto 0) => xlconcat_0_dout(17 downto 0)
     );
 xlconcat_1: component pixel_calc_xlconcat_0_1
      port map (
-      In0(3 downto 0) => xlslice_1_Dout(3 downto 0),
-      In1(13 downto 0) => xlslice_2_Dout(13 downto 0),
+      In0(13 downto 0) => xlslice_2_Dout(13 downto 0),
+      In1(3 downto 0) => xlslice_1_Dout(3 downto 0),
       dout(17 downto 0) => xlconcat_1_dout(17 downto 0)
     );
 xlconcat_2: component pixel_calc_xlconcat_1_0
      port map (
-      In0(3 downto 0) => xlslice_3_Dout(3 downto 0),
-      In1(13 downto 0) => xlslice_4_Dout(13 downto 0),
+      In0(13 downto 0) => xlslice_4_Dout(13 downto 0),
+      In1(3 downto 0) => xlslice_3_Dout(3 downto 0),
       dout(17 downto 0) => xlconcat_2_dout(17 downto 0)
     );
 xlconstant_0: component pixel_calc_xlconstant_0_0

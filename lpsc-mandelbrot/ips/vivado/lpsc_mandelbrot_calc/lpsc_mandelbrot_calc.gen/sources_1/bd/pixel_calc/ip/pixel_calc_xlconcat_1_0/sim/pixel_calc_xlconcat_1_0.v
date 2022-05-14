@@ -59,13 +59,13 @@ module pixel_calc_xlconcat_1_0 (
   dout
 );
 
-input wire [3 : 0] In0;
-input wire [13 : 0] In1;
+input wire [13 : 0] In0;
+input wire [3 : 0] In1;
 output wire [17 : 0] dout;
 
   xlconcat_v2_1_4_xlconcat #(
-    .IN0_WIDTH(4),
-    .IN1_WIDTH(14),
+    .IN0_WIDTH(14),
+    .IN1_WIDTH(4),
     .IN2_WIDTH(1),
     .IN3_WIDTH(1),
     .IN4_WIDTH(1),

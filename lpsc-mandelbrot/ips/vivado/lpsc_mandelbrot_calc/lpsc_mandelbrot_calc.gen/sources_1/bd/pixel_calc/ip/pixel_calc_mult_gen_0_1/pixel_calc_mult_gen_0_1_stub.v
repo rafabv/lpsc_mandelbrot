@@ -1,11 +1,11 @@
 // Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2021.2 (win64) Build 3367213 Tue Oct 19 02:48:09 MDT 2021
-// Date        : Tue May  3 18:48:58 2022
+// Date        : Tue May 10 19:02:37 2022
 // Host        : RBV running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode synth_stub -rename_top pixel_calc_mult_gen_0_1 -prefix
-//               pixel_calc_mult_gen_0_1_ pixel_calc_mult_gen_0_0_stub.v
-// Design      : pixel_calc_mult_gen_0_0
+// Command     : write_verilog -force -mode synth_stub
+//               c:/Users/rafae/lspc_mandelbrot/lpsc-mandelbrot/ips/vivado/lpsc_mandelbrot_calc/lpsc_mandelbrot_calc.gen/sources_1/bd/pixel_calc/ip/pixel_calc_mult_gen_0_1/pixel_calc_mult_gen_0_1_stub.v
+// Design      : pixel_calc_mult_gen_0_1
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7a200tsbg484-1
 // --------------------------------------------------------------------------------
