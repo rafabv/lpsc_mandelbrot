@@ -11,13 +11,13 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="3.310 ns"></ZoomStartTime>
-      <ZoomEndTime time="30.828 ns"></ZoomEndTime>
-      <Cursor1Time time="24.065 ns"></Cursor1Time>
+      <ZoomStartTime time="39.450 ns"></ZoomStartTime>
+      <ZoomEndTime time="78.901 ns"></ZoomEndTime>
+      <Cursor1Time time="41.419 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="240"></NameColumnWidth>
-      <ValueColumnWidth column_width="116"></ValueColumnWidth>
+      <NameColumnWidth column_width="195"></NameColumnWidth>
+      <ValueColumnWidth column_width="119"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="14" />
    <wvobject fp_name="/testbench/clk_s" type="logic">
@@ -27,6 +27,11 @@
    <wvobject fp_name="/testbench/Zin_i" type="array">
       <obj_property name="ElementShortName">Zin_i[17:0]</obj_property>
       <obj_property name="ObjectShortName">Zin_i[17:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench/Zin_r" type="array">
+      <obj_property name="ElementShortName">Zin_r[17:0]</obj_property>
+      <obj_property name="ObjectShortName">Zin_r[17:0]</obj_property>
       <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/testbench/Cin_r" type="array">
@@ -47,44 +52,38 @@
    <wvobject fp_name="/testbench/Zout_r" type="array">
       <obj_property name="ElementShortName">Zout_r[17:0]</obj_property>
       <obj_property name="ObjectShortName">Zout_r[17:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/testbench/C_CLK_PERIOD" type="other">
       <obj_property name="ElementShortName">C_CLK_PERIOD</obj_property>
       <obj_property name="ObjectShortName">C_CLK_PERIOD</obj_property>
    </wvobject>
-   <wvobject fp_name="/testbench/pixel_calc_i/xlconcat_0/In0" type="array">
-      <obj_property name="ElementShortName">In0[0:0]</obj_property>
-      <obj_property name="ObjectShortName">In0[0:0]</obj_property>
+   <wvobject fp_name="/testbench/pixel_calc_i/add1/A" type="array">
+      <obj_property name="ElementShortName">A[35:0]</obj_property>
+      <obj_property name="ObjectShortName">A[35:0]</obj_property>
       <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/testbench/pixel_calc_i/xlconcat_0/In1" type="array">
-      <obj_property name="ElementShortName">In1[16:0]</obj_property>
-      <obj_property name="ObjectShortName">In1[16:0]</obj_property>
+   <wvobject fp_name="/testbench/pixel_calc_i/add1/B" type="array">
+      <obj_property name="ElementShortName">B[35:0]</obj_property>
+      <obj_property name="ObjectShortName">B[35:0]</obj_property>
       <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/testbench/Zin_r" type="array">
-      <obj_property name="ElementShortName">Zin_r[17:0]</obj_property>
-      <obj_property name="ObjectShortName">Zin_r[17:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
+   <wvobject fp_name="/testbench/pixel_calc_i/add1/S" type="array">
+      <obj_property name="ElementShortName">S[35:0]</obj_property>
+      <obj_property name="ObjectShortName">S[35:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/testbench/pixel_calc_i/xlconcat_0/dout" type="array">
-      <obj_property name="ElementShortName">dout[17:0]</obj_property>
-      <obj_property name="ObjectShortName">dout[17:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/testbench/pixel_calc_i/mult_gen_2/A" type="array">
+   <wvobject fp_name="/testbench/pixel_calc_i/mult_gen_3/A" type="array">
       <obj_property name="ElementShortName">A[17:0]</obj_property>
       <obj_property name="ObjectShortName">A[17:0]</obj_property>
       <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/testbench/pixel_calc_i/mult_gen_2/B" type="array">
+   <wvobject fp_name="/testbench/pixel_calc_i/mult_gen_3/B" type="array">
       <obj_property name="ElementShortName">B[17:0]</obj_property>
       <obj_property name="ObjectShortName">B[17:0]</obj_property>
       <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/testbench/pixel_calc_i/mult_gen_2/P" type="array">
+   <wvobject fp_name="/testbench/pixel_calc_i/mult_gen_3/P" type="array">
       <obj_property name="ElementShortName">P[35:0]</obj_property>
       <obj_property name="ObjectShortName">P[35:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
 </wave_config>

@@ -57,7 +57,7 @@
 #include "systemc.h"
 class pixel_calc_xlconstant_1_0 : public sc_module {
   public:
-xlconstant_v1_1_7<18,1> mod;
+xlconstant_v1_1_7<18,16384> mod;
   sc_out< sc_bv<18> > dout;
 pixel_calc_xlconstant_1_0 (sc_core::sc_module_name name);
   };

@@ -241,10 +241,10 @@
         "inst_hier_path": "xlslice_1",
         "parameters": {
           "DIN_FROM": {
-            "value": "23"
+            "value": "31"
           },
           "DIN_TO": {
-            "value": "20"
+            "value": "28"
           },
           "DIN_WIDTH": {
             "value": "36"
@@ -275,10 +275,10 @@
         "inst_hier_path": "xlslice_2",
         "parameters": {
           "DIN_FROM": {
-            "value": "19"
+            "value": "27"
           },
           "DIN_TO": {
-            "value": "6"
+            "value": "14"
           },
           "DIN_WIDTH": {
             "value": "36"
@@ -349,10 +349,10 @@
         "inst_hier_path": "xlslice_3",
         "parameters": {
           "DIN_FROM": {
-            "value": "23"
+            "value": "31"
           },
           "DIN_TO": {
-            "value": "20"
+            "value": "28"
           },
           "DIN_WIDTH": {
             "value": "36"
@@ -369,10 +369,10 @@
         "inst_hier_path": "xlslice_4",
         "parameters": {
           "DIN_FROM": {
-            "value": "19"
+            "value": "27"
           },
           "DIN_TO": {
-            "value": "6"
+            "value": "14"
           },
           "DIN_WIDTH": {
             "value": "36"
@@ -402,6 +402,9 @@
         "xci_path": "ip\\pixel_calc_xlconstant_1_0\\pixel_calc_xlconstant_1_0.xci",
         "inst_hier_path": "xlconstant_1",
         "parameters": {
+          "CONST_VAL": {
+            "value": "16384"
+          },
           "CONST_WIDTH": {
             "value": "18"
           }
