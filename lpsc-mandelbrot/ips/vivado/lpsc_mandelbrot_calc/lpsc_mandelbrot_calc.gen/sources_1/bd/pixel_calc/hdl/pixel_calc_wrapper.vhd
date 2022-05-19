@@ -1,7 +1,7 @@
 --Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------
 --Tool Version: Vivado v.2021.2 (win64) Build 3367213 Tue Oct 19 02:48:09 MDT 2021
---Date        : Tue May 17 09:58:01 2022
+--Date        : Tue May 17 17:16:50 2022
 --Host        : RBV running 64-bit major release  (build 9200)
 --Command     : generate_target pixel_calc_wrapper.bd
 --Design      : pixel_calc_wrapper
@@ -18,7 +18,8 @@ entity pixel_calc_wrapper is
     Zi : in STD_LOGIC_VECTOR ( 17 downto 0 );
     Zni : out STD_LOGIC_VECTOR ( 17 downto 0 );
     Znr : out STD_LOGIC_VECTOR ( 17 downto 0 );
-    Zr : in STD_LOGIC_VECTOR ( 17 downto 0 )
+    Zr : in STD_LOGIC_VECTOR ( 17 downto 0 );
+    somme_div : out STD_LOGIC_VECTOR ( 35 downto 0 )
   );
 end pixel_calc_wrapper;
 
@@ -30,7 +31,8 @@ architecture STRUCTURE of pixel_calc_wrapper is
     Znr : out STD_LOGIC_VECTOR ( 17 downto 0 );
     Ci : in STD_LOGIC_VECTOR ( 17 downto 0 );
     Zni : out STD_LOGIC_VECTOR ( 17 downto 0 );
-    Cr : in STD_LOGIC_VECTOR ( 17 downto 0 )
+    Cr : in STD_LOGIC_VECTOR ( 17 downto 0 );
+    somme_div : out STD_LOGIC_VECTOR ( 35 downto 0 )
   );
   end component pixel_calc;
 begin
@@ -41,6 +43,7 @@ pixel_calc_i: component pixel_calc
       Zi(17 downto 0) => Zi(17 downto 0),
       Zni(17 downto 0) => Zni(17 downto 0),
       Znr(17 downto 0) => Znr(17 downto 0),
-      Zr(17 downto 0) => Zr(17 downto 0)
+      Zr(17 downto 0) => Zr(17 downto 0),
+      somme_div(35 downto 0) => somme_div(35 downto 0)
     );
 end STRUCTURE;

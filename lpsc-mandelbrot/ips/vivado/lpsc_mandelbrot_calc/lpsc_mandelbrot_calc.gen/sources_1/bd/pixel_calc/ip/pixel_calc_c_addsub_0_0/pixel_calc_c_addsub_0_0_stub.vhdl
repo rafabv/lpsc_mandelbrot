@@ -1,10 +1,10 @@
 -- Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2021.2 (win64) Build 3367213 Tue Oct 19 02:48:09 MDT 2021
--- Date        : Tue May 10 19:02:38 2022
+-- Date        : Tue May 10 19:02:36 2022
 -- Host        : RBV running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode synth_stub
---               c:/Users/rafae/lspc_mandelbrot/lpsc-mandelbrot/ips/vivado/lpsc_mandelbrot_calc/lpsc_mandelbrot_calc.gen/sources_1/bd/pixel_calc/ip/pixel_calc_c_addsub_0_0/pixel_calc_c_addsub_0_0_stub.vhdl
+-- Command     : write_vhdl -force -mode synth_stub -rename_top pixel_calc_c_addsub_0_0 -prefix
+--               pixel_calc_c_addsub_0_0_ pixel_calc_c_addsub_0_0_stub.vhdl
 -- Design      : pixel_calc_c_addsub_0_0
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7a200tsbg484-1

@@ -110,6 +110,12 @@ pixel_calc_i: component pixel_calc
         Cin_r <= "001100000000000000"; -- val : 3
         Cin_i <= "111100000000000000"; -- val : -1
         wait for C_CLK_PERIOD;
+        
+        Zin_r <= "000010000000000000"; -- val : 0.5
+        Zin_i <= "000100000000000000"; -- val : 1
+        Cin_r <= "111110000000000000"; -- val : -0.5
+        Cin_i <= "000010000000000000"; -- val : 0.5
+        wait for C_CLK_PERIOD;
 
     end process ;
 

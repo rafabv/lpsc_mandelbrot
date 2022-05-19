@@ -1,58 +1,61 @@
 {
    "ActiveEmotionalView":"Default View",
-   "Default View_ScaleFactor":"0.932911",
-   "Default View_TopLeft":"302,292",
+   "Default View_ScaleFactor":"0.686211",
+   "Default View_TopLeft":"-105,-140",
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.0r6  2020-01-29 bk=1.5227 VDI=41 GEI=36 GUI=JA:10.0 non-TLS
 #  -string -flagsOSRD
-preplace portBus Zr -pg 1 -lvl 0 -x -10 -y 400 -defaultsOSRD
+preplace portBus Zr -pg 1 -lvl 0 -x -10 -y 560 -defaultsOSRD
 preplace portBus Zi -pg 1 -lvl 0 -x -10 -y 80 -defaultsOSRD
-preplace portBus Znr -pg 1 -lvl 7 -x 1320 -y 520 -defaultsOSRD
+preplace portBus Znr -pg 1 -lvl 7 -x 1290 -y 520 -defaultsOSRD
 preplace portBus Ci -pg 1 -lvl 0 -x -10 -y 180 -defaultsOSRD
-preplace portBus Zni -pg 1 -lvl 7 -x 1320 -y 90 -defaultsOSRD
+preplace portBus Zni -pg 1 -lvl 7 -x 1290 -y 90 -defaultsOSRD
 preplace portBus Cr -pg 1 -lvl 0 -x -10 -y 710 -defaultsOSRD
-preplace inst xlslice_0 -pg 1 -lvl 1 -x 120 -y 540 -defaultsOSRD
-preplace inst xlconcat_0 -pg 1 -lvl 2 -x 360 -y 470 -defaultsOSRD
-preplace inst xlconstant_0 -pg 1 -lvl 1 -x 120 -y 440 -defaultsOSRD
-preplace inst mult_gen_0 -pg 1 -lvl 2 -x 360 -y 590 -defaultsOSRD
-preplace inst sub -pg 1 -lvl 3 -x 580 -y 600 -defaultsOSRD
-preplace inst add -pg 1 -lvl 4 -x 760 -y 610 -defaultsOSRD
-preplace inst mult_gen_1 -pg 1 -lvl 2 -x 360 -y 350 -defaultsOSRD
-preplace inst xlslice_1 -pg 1 -lvl 5 -x 960 -y 610 -defaultsOSRD
-preplace inst xlconcat_1 -pg 1 -lvl 6 -x 1190 -y 520 -defaultsOSRD
-preplace inst xlslice_2 -pg 1 -lvl 5 -x 960 -y 510 -defaultsOSRD
-preplace inst mult_gen_2 -pg 1 -lvl 3 -x 580 -y 70 -defaultsOSRD
-preplace inst add1 -pg 1 -lvl 4 -x 760 -y 180 -defaultsOSRD
-preplace inst mult_gen_3 -pg 1 -lvl 3 -x 580 -y 190 -defaultsOSRD
-preplace inst xlslice_3 -pg 1 -lvl 5 -x 960 -y 190 -defaultsOSRD
-preplace inst xlslice_4 -pg 1 -lvl 5 -x 960 -y 80 -defaultsOSRD
-preplace inst xlconcat_2 -pg 1 -lvl 6 -x 1190 -y 90 -defaultsOSRD
-preplace inst xlconstant_1 -pg 1 -lvl 2 -x 360 -y 240 -defaultsOSRD
-preplace inst mult_gen_4 -pg 1 -lvl 3 -x 580 -y 720 -defaultsOSRD
-preplace netloc A_0_1 1 0 2 10 380 230J
+preplace portBus somme_div -pg 1 -lvl 7 -x 1290 -y 400 -defaultsOSRD
+preplace inst xlslice_0 -pg 1 -lvl 1 -x 120 -y 560 -defaultsOSRD
+preplace inst xlconcat_0 -pg 1 -lvl 2 -x 340 -y 470 -defaultsOSRD
+preplace inst xlconstant_0 -pg 1 -lvl 1 -x 120 -y 460 -defaultsOSRD
+preplace inst mult_gen_0 -pg 1 -lvl 2 -x 340 -y 590 -defaultsOSRD
+preplace inst sub -pg 1 -lvl 3 -x 560 -y 600 -defaultsOSRD
+preplace inst add -pg 1 -lvl 4 -x 740 -y 610 -defaultsOSRD
+preplace inst mult_gen_1 -pg 1 -lvl 2 -x 340 -y 350 -defaultsOSRD
+preplace inst xlslice_1 -pg 1 -lvl 5 -x 940 -y 610 -defaultsOSRD
+preplace inst xlconcat_1 -pg 1 -lvl 6 -x 1160 -y 520 -defaultsOSRD
+preplace inst xlslice_2 -pg 1 -lvl 5 -x 940 -y 510 -defaultsOSRD
+preplace inst mult_gen_2 -pg 1 -lvl 3 -x 560 -y 70 -defaultsOSRD
+preplace inst add1 -pg 1 -lvl 4 -x 740 -y 180 -defaultsOSRD
+preplace inst mult_gen_3 -pg 1 -lvl 3 -x 560 -y 190 -defaultsOSRD
+preplace inst xlslice_3 -pg 1 -lvl 5 -x 940 -y 180 -defaultsOSRD
+preplace inst xlslice_4 -pg 1 -lvl 5 -x 940 -y 80 -defaultsOSRD
+preplace inst xlconcat_2 -pg 1 -lvl 6 -x 1160 -y 90 -defaultsOSRD
+preplace inst xlconstant_1 -pg 1 -lvl 2 -x 340 -y 240 -defaultsOSRD
+preplace inst mult_gen_4 -pg 1 -lvl 3 -x 560 -y 720 -defaultsOSRD
+preplace inst add2 -pg 1 -lvl 4 -x 740 -y 400 -defaultsOSRD
+preplace netloc A_0_1 1 0 2 10 400 220J
 preplace netloc A_0_2 1 0 3 NJ 180 NJ 180 NJ
 preplace netloc A_0_3 1 0 3 NJ 710 NJ 710 NJ
 preplace netloc A_1_1 1 0 3 NJ 80 220 80 NJ
-preplace netloc add1_S 1 4 1 850 80n
-preplace netloc add_S 1 4 1 850 510n
+preplace netloc add1_S 1 4 1 830 80n
+preplace netloc add_S 1 4 1 830 510n
 preplace netloc c_addsub_0_S 1 3 1 N 600
-preplace netloc mult_gen_0_P 1 2 1 NJ 590
-preplace netloc mult_gen_1_P 1 2 1 470J 350n
-preplace netloc mult_gen_2_P 1 3 1 670 70n
+preplace netloc mult_gen_0_P 1 2 2 470J 410 N
+preplace netloc mult_gen_1_P 1 2 2 450J 390 N
+preplace netloc mult_gen_2_P 1 3 1 650 70n
 preplace netloc mult_gen_3_P 1 3 1 N 190
-preplace netloc mult_gen_4_P 1 3 1 670 620n
-preplace netloc xlconcat_0_dout 1 2 1 460 60n
+preplace netloc mult_gen_4_P 1 3 1 650 620n
+preplace netloc xlconcat_0_dout 1 2 1 440 60n
 preplace netloc xlconcat_1_dout 1 6 1 NJ 520
 preplace netloc xlconcat_2_dout 1 6 1 NJ 90
-preplace netloc xlconstant_0_dout 1 1 1 220 440n
-preplace netloc xlconstant_1_dout 1 2 1 480 200n
-preplace netloc xlslice_0_Dout 1 1 1 240 480n
-preplace netloc xlslice_1_Dout 1 5 1 1060 530n
+preplace netloc xlconstant_0_dout 1 1 1 NJ 460
+preplace netloc xlconstant_1_dout 1 2 1 460 200n
+preplace netloc xlslice_0_Dout 1 1 1 230J 480n
+preplace netloc xlslice_1_Dout 1 5 1 1040 530n
 preplace netloc xlslice_2_Dout 1 5 1 N 510
-preplace netloc xlslice_3_Dout 1 5 1 1060 100n
+preplace netloc xlslice_3_Dout 1 5 1 1040 100n
 preplace netloc xlslice_4_Dout 1 5 1 N 80
-levelinfo -pg 1 -10 120 360 580 760 960 1190 1320
-pagesize -pg 1 -db -bbox -sgen -110 -50 1430 790
+preplace netloc add2_S 1 4 3 NJ 400 NJ 400 NJ
+levelinfo -pg 1 -10 120 340 560 740 940 1160 1290
+pagesize -pg 1 -db -bbox -sgen -110 -70 1450 790
 "
 }
 0

@@ -200,6 +200,7 @@ proc create_root_design { parentCell } {
   set Zni [ create_bd_port -dir O -from 17 -to 0 Zni ]
   set Znr [ create_bd_port -dir O -from 17 -to 0 Znr ]
   set Zr [ create_bd_port -dir I -from 17 -to 0 -type data Zr ]
+  set somme_div [ create_bd_port -dir O -from 35 -to 0 -type data somme_div ]
 
   # Create instance: add, and set properties
   set add [ create_bd_cell -type ip -vlnv xilinx.com:ip:c_addsub:12.0 add ]
@@ -224,6 +225,18 @@ proc create_root_design { parentCell } {
    CONFIG.Latency {0} \
    CONFIG.Out_Width {36} \
  ] $add1
+
+  # Create instance: add2, and set properties
+  set add2 [ create_bd_cell -type ip -vlnv xilinx.com:ip:c_addsub:12.0 add2 ]
+  set_property -dict [ list \
+   CONFIG.A_Width {36} \
+   CONFIG.Add_Mode {Add} \
+   CONFIG.B_Value {000000000000000000000000000000000000} \
+   CONFIG.B_Width {36} \
+   CONFIG.CE {false} \
+   CONFIG.Latency {0} \
+   CONFIG.Out_Width {36} \
+ ] $add2
 
   # Create instance: mult_gen_0, and set properties
   set mult_gen_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:mult_gen:12.0 mult_gen_0 ]
@@ -273,22 +286,21 @@ proc create_root_design { parentCell } {
   # Create instance: xlconcat_0, and set properties
   set xlconcat_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_0 ]
   set_property -dict [ list \
-   CONFIG.IN0_WIDTH {17} \
-   CONFIG.IN1_WIDTH {1} \
+   CONFIG.IN1_WIDTH {17} \
  ] $xlconcat_0
 
   # Create instance: xlconcat_1, and set properties
   set xlconcat_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_1 ]
   set_property -dict [ list \
-   CONFIG.IN0_WIDTH {4} \
-   CONFIG.IN1_WIDTH {14} \
+   CONFIG.IN0_WIDTH {14} \
+   CONFIG.IN1_WIDTH {4} \
  ] $xlconcat_1
 
   # Create instance: xlconcat_2, and set properties
   set xlconcat_2 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconcat:2.1 xlconcat_2 ]
   set_property -dict [ list \
-   CONFIG.IN0_WIDTH {4} \
-   CONFIG.IN1_WIDTH {14} \
+   CONFIG.IN0_WIDTH {14} \
+   CONFIG.IN1_WIDTH {4} \
  ] $xlconcat_2
 
   # Create instance: xlconstant_0, and set properties
@@ -301,6 +313,7 @@ proc create_root_design { parentCell } {
   # Create instance: xlconstant_1, and set properties
   set xlconstant_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlconstant:1.1 xlconstant_1 ]
   set_property -dict [ list \
+   CONFIG.CONST_VAL {16384} \
    CONFIG.CONST_WIDTH {18} \
  ] $xlconstant_1
 
@@ -316,8 +329,8 @@ proc create_root_design { parentCell } {
   # Create instance: xlslice_1, and set properties
   set xlslice_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 xlslice_1 ]
   set_property -dict [ list \
-   CONFIG.DIN_FROM {23} \
-   CONFIG.DIN_TO {20} \
+   CONFIG.DIN_FROM {31} \
+   CONFIG.DIN_TO {28} \
    CONFIG.DIN_WIDTH {36} \
    CONFIG.DOUT_WIDTH {4} \
  ] $xlslice_1
@@ -325,8 +338,8 @@ proc create_root_design { parentCell } {
   # Create instance: xlslice_2, and set properties
   set xlslice_2 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 xlslice_2 ]
   set_property -dict [ list \
-   CONFIG.DIN_FROM {19} \
-   CONFIG.DIN_TO {6} \
+   CONFIG.DIN_FROM {27} \
+   CONFIG.DIN_TO {14} \
    CONFIG.DIN_WIDTH {36} \
    CONFIG.DOUT_WIDTH {14} \
  ] $xlslice_2
@@ -334,8 +347,8 @@ proc create_root_design { parentCell } {
   # Create instance: xlslice_3, and set properties
   set xlslice_3 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 xlslice_3 ]
   set_property -dict [ list \
-   CONFIG.DIN_FROM {23} \
-   CONFIG.DIN_TO {20} \
+   CONFIG.DIN_FROM {31} \
+   CONFIG.DIN_TO {28} \
    CONFIG.DIN_WIDTH {36} \
    CONFIG.DOUT_WIDTH {4} \
  ] $xlslice_3
@@ -343,8 +356,8 @@ proc create_root_design { parentCell } {
   # Create instance: xlslice_4, and set properties
   set xlslice_4 [ create_bd_cell -type ip -vlnv xilinx.com:ip:xlslice:1.0 xlslice_4 ]
   set_property -dict [ list \
-   CONFIG.DIN_FROM {19} \
-   CONFIG.DIN_TO {6} \
+   CONFIG.DIN_FROM {27} \
+   CONFIG.DIN_TO {14} \
    CONFIG.DIN_WIDTH {36} \
    CONFIG.DOUT_WIDTH {14} \
  ] $xlslice_4
@@ -355,23 +368,24 @@ proc create_root_design { parentCell } {
   connect_bd_net -net A_0_3 [get_bd_ports Cr] [get_bd_pins mult_gen_4/A]
   connect_bd_net -net A_1_1 [get_bd_ports Zi] [get_bd_pins mult_gen_1/A] [get_bd_pins mult_gen_1/B] [get_bd_pins mult_gen_2/B]
   connect_bd_net -net add1_S [get_bd_pins add1/S] [get_bd_pins xlslice_3/Din] [get_bd_pins xlslice_4/Din]
+  connect_bd_net -net add2_S [get_bd_ports somme_div] [get_bd_pins add2/S]
   connect_bd_net -net add_S [get_bd_pins add/S] [get_bd_pins xlslice_1/Din] [get_bd_pins xlslice_2/Din]
   connect_bd_net -net c_addsub_0_S [get_bd_pins add/A] [get_bd_pins sub/S]
-  connect_bd_net -net mult_gen_0_P [get_bd_pins mult_gen_0/P] [get_bd_pins sub/A]
-  connect_bd_net -net mult_gen_1_P [get_bd_pins mult_gen_1/P] [get_bd_pins sub/B]
+  connect_bd_net -net mult_gen_0_P [get_bd_pins add2/B] [get_bd_pins mult_gen_0/P] [get_bd_pins sub/A]
+  connect_bd_net -net mult_gen_1_P [get_bd_pins add2/A] [get_bd_pins mult_gen_1/P] [get_bd_pins sub/B]
   connect_bd_net -net mult_gen_2_P [get_bd_pins add1/A] [get_bd_pins mult_gen_2/P]
   connect_bd_net -net mult_gen_3_P [get_bd_pins add1/B] [get_bd_pins mult_gen_3/P]
   connect_bd_net -net mult_gen_4_P [get_bd_pins add/B] [get_bd_pins mult_gen_4/P]
   connect_bd_net -net xlconcat_0_dout [get_bd_pins mult_gen_2/A] [get_bd_pins xlconcat_0/dout]
   connect_bd_net -net xlconcat_1_dout [get_bd_ports Znr] [get_bd_pins xlconcat_1/dout]
   connect_bd_net -net xlconcat_2_dout [get_bd_ports Zni] [get_bd_pins xlconcat_2/dout]
-  connect_bd_net -net xlconstant_0_dout [get_bd_pins xlconcat_0/In1] [get_bd_pins xlconstant_0/dout]
+  connect_bd_net -net xlconstant_0_dout [get_bd_pins xlconcat_0/In0] [get_bd_pins xlconstant_0/dout]
   connect_bd_net -net xlconstant_1_dout [get_bd_pins mult_gen_3/B] [get_bd_pins mult_gen_4/B] [get_bd_pins xlconstant_1/dout]
-  connect_bd_net -net xlslice_0_Dout [get_bd_pins xlconcat_0/In0] [get_bd_pins xlslice_0/Dout]
-  connect_bd_net -net xlslice_1_Dout [get_bd_pins xlconcat_1/In0] [get_bd_pins xlslice_1/Dout]
-  connect_bd_net -net xlslice_2_Dout [get_bd_pins xlconcat_1/In1] [get_bd_pins xlslice_2/Dout]
-  connect_bd_net -net xlslice_3_Dout [get_bd_pins xlconcat_2/In0] [get_bd_pins xlslice_3/Dout]
-  connect_bd_net -net xlslice_4_Dout [get_bd_pins xlconcat_2/In1] [get_bd_pins xlslice_4/Dout]
+  connect_bd_net -net xlslice_0_Dout [get_bd_pins xlconcat_0/In1] [get_bd_pins xlslice_0/Dout]
+  connect_bd_net -net xlslice_1_Dout [get_bd_pins xlconcat_1/In1] [get_bd_pins xlslice_1/Dout]
+  connect_bd_net -net xlslice_2_Dout [get_bd_pins xlconcat_1/In0] [get_bd_pins xlslice_2/Dout]
+  connect_bd_net -net xlslice_3_Dout [get_bd_pins xlconcat_2/In1] [get_bd_pins xlslice_3/Dout]
+  connect_bd_net -net xlslice_4_Dout [get_bd_pins xlconcat_2/In0] [get_bd_pins xlslice_4/Dout]
 
   # Create address segments
 

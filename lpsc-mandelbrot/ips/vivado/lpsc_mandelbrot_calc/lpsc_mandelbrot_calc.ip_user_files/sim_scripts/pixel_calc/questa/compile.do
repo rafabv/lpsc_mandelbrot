@@ -100,6 +100,7 @@ vlog -work xil_defaultlib  -incr -mfcu \
 
 vcom -work xil_defaultlib  -93 \
 "../../../bd/pixel_calc/ip/pixel_calc_mult_gen_3_1/sim/pixel_calc_mult_gen_3_1.vhd" \
+"../../../bd/pixel_calc/ip/pixel_calc_add1_0/sim/pixel_calc_add1_0.vhd" \
 "../../../bd/pixel_calc/sim/pixel_calc.vhd" \
 
 vlog -work xil_defaultlib \

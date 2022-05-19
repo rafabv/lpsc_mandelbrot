@@ -22,8 +22,8 @@ entity ComplexValueGenerator is
          reset         : in  std_logic;
          -- interface avec le module MandelbrotMiddleware
          next_value    : in  std_logic;
-         c_inc_RE      : in  std_logic_vector((SIZE - 1) downto 0); -- increment 3/1024
-         c_inc_IM      : in  std_logic_vector((SIZE - 1) downto 0); -- increment 2/600
+         c_inc_RE      : in  std_logic_vector((SIZE - 1) downto 0);
+         c_inc_IM      : in  std_logic_vector((SIZE - 1) downto 0);
          c_top_left_RE : in  std_logic_vector((SIZE - 1) downto 0);
          c_top_left_IM : in  std_logic_vector((SIZE - 1) downto 0);
          c_real        : out std_logic_vector((SIZE - 1) downto 0);

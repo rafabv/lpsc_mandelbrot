@@ -16,5 +16,6 @@ pixel_calc_xlslice_2_0.v,verilog,xil_defaultlib,../../../bd/pixel_calc/ip/pixel_
 pixel_calc_xlconcat_1_0.v,verilog,xil_defaultlib,../../../bd/pixel_calc/ip/pixel_calc_xlconcat_1_0/sim/pixel_calc_xlconcat_1_0.v,
 pixel_calc_xlconstant_1_0.v,verilog,xil_defaultlib,../../../bd/pixel_calc/ip/pixel_calc_xlconstant_1_0/sim/pixel_calc_xlconstant_1_0.v,
 pixel_calc_mult_gen_3_1.vhd,vhdl,xil_defaultlib,../../../bd/pixel_calc/ip/pixel_calc_mult_gen_3_1/sim/pixel_calc_mult_gen_3_1.vhd,
+pixel_calc_add1_0.vhd,vhdl,xil_defaultlib,../../../bd/pixel_calc/ip/pixel_calc_add1_0/sim/pixel_calc_add1_0.vhd,
 pixel_calc.vhd,vhdl,xil_defaultlib,../../../bd/pixel_calc/sim/pixel_calc.vhd,
 glbl.v,Verilog,xil_defaultlib,glbl.v
