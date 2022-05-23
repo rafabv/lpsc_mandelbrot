@@ -100,10 +100,10 @@ architecture arch of lpsc_mandelbrot_firmware is
     constant C_FIFO_PARITY_SIZE                 : integer               := 4;
     constant C_OUTPUT_BUFFER                    : boolean               := false;
     constant STEPX                              : std_logic_vector(17 downto 0):= "000000000000110000";
-    constant STEPY                              : std_logic_vector(17 downto 0):= "000000000000110000";
+    constant STEPY                              : std_logic_vector(17 downto 0):= "000000000000110111";
     constant C_TOP_LEFT_RE_c                    : std_logic_vector(17 downto 0):= "111000000000000000"; -- val : -2
     constant C_TOP_LEFT_IM_c                    : std_logic_vector(17 downto 0):= "000100000000000000"; -- val : 1
-    constant N_ITER                             : integer := 100;
+    constant N_ITER                             : integer := 500;
     
 
     -- Components
@@ -206,6 +206,16 @@ architecture arch of lpsc_mandelbrot_firmware is
         somme_div : out STD_LOGIC_VECTOR ( 17 downto 0 )
     );
     end component pixel_calc;
+    
+--    COMPONENT ila_0
+--    PORT (
+--        clk : IN STD_LOGIC;
+--        probe0 : IN STD_LOGIC_VECTOR(19 DOWNTO 0); 
+--        probe1 : IN STD_LOGIC_VECTOR(8 DOWNTO 0);
+--        probe2 : IN STD_LOGIC_VECTOR(0 DOWNTO 0)
+--    );
+--    END COMPONENT  ;
+
 
     -- Signals
 
@@ -251,20 +261,24 @@ architecture arch of lpsc_mandelbrot_firmware is
     -- signal 
     signal next_val_s           : std_logic ;
     signal reset_s              : std_logic ;
-    signal ci_in_s              : std_logic_vector (17 downto 0);
-    signal cr_in_s              : std_logic_vector (17 downto 0);    
+    signal c_real_s             : std_logic_vector (17 downto 0);
+    signal c_imaginary_s        : std_logic_vector (17 downto 0);
+--    signal ci_in_s              : std_logic_vector (17 downto 0);
+--    signal cr_in_s              : std_logic_vector (17 downto 0);    
     signal zi_in_s              : std_logic_vector (17 downto 0);
     signal zr_in_s              : std_logic_vector (17 downto 0);
     signal zr_out_s             : std_logic_vector (17 downto 0);
     signal zi_out_s             : std_logic_vector (17 downto 0);
     signal somme_diverg         : std_logic_vector (17 downto 0):=(others => '0');
-    signal x_screen_s           : std_logic_vector (17 downto 0);
-    signal y_screen_s           : std_logic_vector (17 downto 0);
+    signal x_screen_s           : std_logic_vector (9 downto 0);
+    signal y_screen_s           : std_logic_vector (9 downto 0);
     type fsm is (idle, iteration,write_mem);
-    signal state                : fsm;
+    signal state                : fsm:= idle;
     signal compt_iter_s         : integer:=0;
     signal we_s                 : std_logic:= '0';
     signal val_4                : std_logic_vector(17 downto 0):="010000000000000000";
+    
+
     
     
    
@@ -361,7 +375,9 @@ begin
     signal wea_s : std_logic_vector (0 downto 0):= (others => '0');
     
     begin  -- block VgaHdmiToFpgaUserCDCxB
-         wea_s(0) <= PllLockedxD(0) and we_s;
+         --wea_s(0) <= PllLockedxD(0) and we_s;
+         --wea_s(0) <= PllLockedxS;
+         wea_s(0) <= we_s;
          
          BramVideoMemoryxI : bram_video_memory_wauto_dauto_rdclk1_wrclk1
              port map (
@@ -390,19 +406,19 @@ begin
         signal ClkSys100MhzBufgxC : std_logic                                    := '0';
         signal HCountIntxD        : std_logic_vector((C_DATA_SIZE - 1) downto 0) := std_logic_vector(C_VGA_CONFIG.HActivexD - 1);
         signal VCountIntxD        : std_logic_vector((C_DATA_SIZE - 1) downto 0) := (others => '0');
-        signal comp_div_s         : std_logic := '0';       
+        signal comparator_s         : std_logic := '0';       
 
     begin  -- block FpgaUserCDxB
 
         PllNotLockedxAS : PllNotLockedxS <= not PllLockedxS;
         PllLockedxAS    : PllLockedxD(0) <= PllLockedxS;
 
-        BramVideoMemoryWriteDataxAS : BramVideoMemoryWriteDataxD <= DataImGen2BramMVxD(23 downto 21) &
-                                                                    DataImGen2BramMVxD(15 downto 13) &
-                                                                    DataImGen2BramMVxD(7 downto 5);
+--        BramVideoMemoryWriteDataxAS : BramVideoMemoryWriteDataxD <= DataImGen2BramMVxD(23 downto 21) &
+--                                                                    DataImGen2BramMVxD(15 downto 13) &
+--                                                                    DataImGen2BramMVxD(7 downto 5);
 
-        BramVMWrAddrxAS : BramVideoMemoryWriteAddrxD <= VCountIntxD((C_BRAM_VIDEO_MEMORY_HIGH_ADDR_SIZE - 1) downto 0) &
-                                                        HCountIntxD((C_BRAM_VIDEO_MEMORY_LOW_ADDR_SIZE - 1) downto 0);
+--        BramVMWrAddrxAS : BramVideoMemoryWriteAddrxD <= VCountIntxD((C_BRAM_VIDEO_MEMORY_HIGH_ADDR_SIZE - 1) downto 0) &
+--                                                        HCountIntxD((C_BRAM_VIDEO_MEMORY_LOW_ADDR_SIZE - 1) downto 0);
 
         BUFGClkSysToClkMandelxI : BUFG
             port map (
@@ -431,15 +447,15 @@ begin
              c_inc_IM      => STEPY,
              c_top_left_RE => C_TOP_LEFT_RE_c,
              c_top_left_IM => C_TOP_LEFT_IM_c,
-             c_real        => cr_in_s,
-             c_imaginary   => ci_in_s,
+             c_real        => c_real_s,
+             c_imaginary   => c_imaginary_s,
              X_screen      => x_screen_s,
              Y_screen      => y_screen_s);
                           
          pixel_calc_i: pixel_calc
              port map (
-              Ci(17 downto 0) => ci_in_s,
-              Cr(17 downto 0) => cr_in_s ,
+              Ci(17 downto 0) => c_imaginary_s,
+              Cr(17 downto 0) => c_real_s ,
               Zi(17 downto 0) => zi_in_s,
               Zr(17 downto 0) => zr_in_s,
               Zni(17 downto 0) =>zi_out_s,
@@ -447,19 +463,31 @@ begin
               somme_div(17 downto 0) => somme_diverg
         );
         
-
-        process(all) is
-        begin 
-            if somme_diverg < val_4 then
-                comp_div_s <= '0';
-            else
-                comp_div_s <= '1';
-            end if;
-        end process;
+--        ila : ila_0
+--        PORT MAP (
+--            clk => ClkMandelxC,
+--            probe0 => BramVideoMemoryWriteAddrxD, 
+--            probe1 => BramVideoMemoryWriteDataxD,
+--            probe2(0) => we_s --wea_s(0)
+--        );
         
+        -- comparaison pour savoir si le nombre diverge
+--        process(all) is
+--        begin 
+--            if somme_diverg(17 downto 14) < val_4(17 downto 14) then
+--                comparator_s <= '1';
+--            else
+--                comparator_s <= '0';
+--            end if;
+--        end process;
+
+        comparator_s <= '1' when (somme_diverg(17 downto 14) < val_4(17 downto 14)) else '0';
+        --BramVideoMemoryWriteDataxD <= "000101111";
+
         process(ClkMandelxC) is
         begin
             if (rising_edge(ClkMandelxC)) then
+            --BramVideoMemoryWriteAddrxD <= std_logic_vector(unsigned(BramVideoMemoryWriteAddrxD) + 1);
                 if reset_s ='1' then
                     state <= idle;
                 else
@@ -473,22 +501,32 @@ begin
                             state <= iteration;
 
                         WHEN iteration=>
-                            if (comp_div_s = '0') OR (compt_iter_s<N_ITER) then
+                            if((comparator_s = '1') AND (compt_iter_s<N_ITER)) then
                                 compt_iter_s <= compt_iter_s + 1;
                                 zi_in_s <= zi_out_s;
                                 zr_in_s <= zr_out_s;
                                 next_val_s <= '0';
                                 we_s <= '0';
-                            elsif (comp_div_s = '1') OR (compt_iter_s=N_ITER) then
+                                state <= iteration;
+
+                            elsif (comparator_s = '0') OR (compt_iter_s>=N_ITER) then
                                 we_s <= '1';
+                                next_val_s <= '0';
+                                BramVideoMemoryWriteAddrxD <= y_screen_s & x_screen_s;
+                                BramVideoMemoryWriteDataxD <= std_logic_vector(to_unsigned(compt_iter_s, BramVideoMemoryWriteDataxD'length));
+                                
+                                state <= write_mem;
                             end if;
-
                         WHEN write_mem=>
-
+                            we_s <= '0';
+                            next_val_s <= '1';
+                            compt_iter_s <= 0;
+                            zi_in_s <= (others => '0');
+                            zr_in_s <= (others => '0');                           
+                            state <= iteration;
                      END CASE;
                 end if;
             end if;
-        
         end process;
                 
                 
