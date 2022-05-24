@@ -45,7 +45,8 @@ entity lpsc_mandelbrot_firmware is
         -- Leds
         LedxDO          : out   std_logic_vector((C_GPIO_SIZE - 1) downto 0);
         -- Buttons
-        -- BtnCxSI         : in    std_logic;
+        BtnD_s         : in    std_logic;
+        BtnU_s         : in    std_logic;
         -- HDMI
         HdmiTxRsclxSO   : out   std_logic;
         HdmiTxRsdaxSIO  : inout std_logic;
@@ -99,11 +100,28 @@ architecture arch of lpsc_mandelbrot_firmware is
     constant C_FIFO_DATA_SIZE                   : integer               := 32;
     constant C_FIFO_PARITY_SIZE                 : integer               := 4;
     constant C_OUTPUT_BUFFER                    : boolean               := false;
-    constant STEPX                              : std_logic_vector(17 downto 0):= "000000000000110000";
-    constant STEPY                              : std_logic_vector(17 downto 0):= "000000000000110111";
-    constant C_TOP_LEFT_RE_c                    : std_logic_vector(17 downto 0):= "111000000000000000"; -- val : -2
-    constant C_TOP_LEFT_IM_c                    : std_logic_vector(17 downto 0):= "000100000000000000"; -- val : 1
-    constant N_ITER                             : integer := 100;
+    ---- vue ensemble
+    constant STEPX0                              : std_logic_vector(17 downto 0):= "000000000000110000";
+    constant STEPY0                              : std_logic_vector(17 downto 0):= "000000000000110111";
+    constant C_TOP_LEFT_RE0_c                    : std_logic_vector(17 downto 0):= "111000000000000000"; -- val : -2
+    constant C_TOP_LEFT_IM0_c                    : std_logic_vector(17 downto 0):= "000100000000000000"; -- val : 1
+    -- zoom 1
+    constant STEPX1                              : std_logic_vector(17 downto 0):= "000000000000001111";
+    constant STEPY1                              : std_logic_vector(17 downto 0):= "000000000000100000";
+    constant C_TOP_LEFT_RE1_c                    : std_logic_vector(17 downto 0):= "111110000000000000";
+    constant C_TOP_LEFT_IM1_c                    : std_logic_vector(17 downto 0):= "000010000000000000";
+    -- zoom 2
+    constant STEPX2                              : std_logic_vector(17 downto 0):= "000000000000001111";
+    constant STEPY2                              : std_logic_vector(17 downto 0):= "000000000000100000";
+    constant C_TOP_LEFT_RE2_c                    : std_logic_vector(17 downto 0):= "111110000000000000";
+    constant C_TOP_LEFT_IM2_c                    : std_logic_vector(17 downto 0):= "000010000000000000";
+    -- zoom 3
+    constant STEPX3                              : std_logic_vector(17 downto 0):= "000000000000001111";
+    constant STEPY3                              : std_logic_vector(17 downto 0):= "000000000000100000";
+    constant C_TOP_LEFT_RE3_c                    : std_logic_vector(17 downto 0):= "111110000000000000";
+    constant C_TOP_LEFT_IM3_c                    : std_logic_vector(17 downto 0):= "000010000000000000";
+   
+    constant N_ITER                             : integer := 200;
     
 
     -- Components
@@ -207,6 +225,15 @@ architecture arch of lpsc_mandelbrot_firmware is
     );
     end component pixel_calc;
     
+    component lpsc_edge_detector is
+    port (
+        ClkxCI   : in  std_ulogic;
+        RstxRI   : in  std_ulogic;
+        ProbexSI : in  std_ulogic;
+        PulsexSO : out std_ulogic
+        );
+    end component lpsc_edge_detector;
+    
 --    COMPONENT ila_0
 --    PORT (
 --        clk : IN STD_LOGIC;
@@ -279,17 +306,33 @@ architecture arch of lpsc_mandelbrot_firmware is
     signal we_s                 : std_logic:= '0';
     signal val_4                : std_logic_vector(17 downto 0):="010000000000000000";
     
+    signal BtnD_pulse_s         : std_logic;
+    signal BtnU_pulse_s         : std_logic;
+    
+    signal compt_zoom_s         : integer:=0;
+    signal stepx_s              : std_logic_vector(17 downto 0);
+    signal stepy_s              : std_logic_vector(17 downto 0);
+    signal c_top_left_re_s      : std_logic_vector(17 downto 0);
+    signal c_top_left_im_s      : std_logic_vector(17 downto 0);
+    signal select_s             : std_logic;
+    
+    
 
     
     
    
 
-    -- Attributes
-    -- attribute mark_debug                              : string;
-    -- attribute mark_debug of DebugFlagColor1RegPortxDP : signal is "true";
-    -- --
-    -- attribute keep                                    : string;
-    -- attribute keep of DebugFlagColor1RegPortxDP       : signal is "true";
+--    -- Attributes
+--     attribute mark_debug                              : string;
+--     attribute mark_debug of BtnD_pulse_s : signal is "true";
+--    -- --
+--     attribute keep                                    : string;
+--     attribute keep of BtnD_pulse_s       : signal is "true";
+     
+--     -- Attributes
+--     attribute mark_debug of select_s : signal is "true";
+--    -- --
+--     attribute keep of select_s       : signal is "true";
 
 begin
 
@@ -444,10 +487,10 @@ begin
              reset         => reset_s,
              -- interface avec le module MandelbrotMiddleware
              next_value    => next_val_s,
-             c_inc_RE      => STEPX,
-             c_inc_IM      => STEPY,
-             c_top_left_RE => C_TOP_LEFT_RE_c,
-             c_top_left_IM => C_TOP_LEFT_IM_c,
+             c_inc_RE      => stepx_s,
+             c_inc_IM      => stepy_s,
+             c_top_left_RE => c_top_left_re_s,
+             c_top_left_IM => c_top_left_im_s,
              c_real        => c_real_s,
              c_imaginary   => c_imaginary_s,
              X_screen      => x_screen_s,
@@ -464,6 +507,20 @@ begin
               somme_div(17 downto 0) => somme_diverg
         );
         
+        edge_detect_BtnD : lpsc_edge_detector
+            port map (
+            ClkxCI   => ClkMandelxC,
+            RstxRI   => reset_s,
+            ProbexSI => BtnD_s,
+            PulsexSO => BtnD_pulse_s);
+            
+        edge_detect_BtnU : lpsc_edge_detector
+            port map (
+            ClkxCI   => ClkMandelxC,
+            RstxRI   => reset_s,
+            ProbexSI => BtnU_s,
+            PulsexSO => BtnU_pulse_s);
+        
 --        ila : ila_0
 --        PORT MAP (
 --            clk => ClkMandelxC,
@@ -474,14 +531,21 @@ begin
         
         -- comparaison pour savoir si le nombre diverge
 --        process(all) is
---        begin 
+--        begin y
 --            if somme_diverg(17 downto 14) < val_4(17 downto 14) then
 --                comparator_s <= '1';
 --            else
 --                comparator_s <= '0';
 --            end if;
 --        end process;
-
+        
+      
+        
+        stepx_s <= STEPX1 when select_s = '1' else STEPX0;
+        stepy_s <= STEPY1 when select_s = '1' else STEPY0;
+        c_top_left_re_s <= C_TOP_LEFT_RE1_c when select_s = '1' else C_TOP_LEFT_RE0_c;
+        c_top_left_im_s <= C_TOP_LEFT_IM1_c when select_s = '1' else C_TOP_LEFT_IM0_c;
+        
         comparator_s <= '1' when (somme_diverg(17 downto 14) < val_4(17 downto 14)) else '0';
         --BramVideoMemoryWriteDataxD <= "000101111";
 
@@ -490,8 +554,13 @@ begin
             if (rising_edge(ClkMandelxC)) then
             --BramVideoMemoryWriteAddrxD <= std_logic_vector(unsigned(BramVideoMemoryWriteAddrxD) + 1);
                 if reset_s ='1' then
-                    state <= idle;
+                    state <= idle; 
+                    select_s <= '0';               
                 else
+                    -- maintien des pulses
+                    if BtnD_pulse_s = '1' then
+                        select_s <= not select_s;
+                    end if;
                     CASE state IS
                         WHEN idle=>
                             zi_in_s <= (others => '0');

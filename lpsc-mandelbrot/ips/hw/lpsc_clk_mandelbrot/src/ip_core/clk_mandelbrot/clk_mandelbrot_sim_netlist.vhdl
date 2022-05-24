@@ -1,10 +1,10 @@
 -- Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2021.2 (win64) Build 3367213 Tue Oct 19 02:48:09 MDT 2021
--- Date        : Tue May 24 12:38:46 2022
+-- Date        : Tue May 24 15:22:45 2022
 -- Host        : RBV running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode funcsim
---               c:/Users/rafae/lspc_mandelbrot/lpsc-mandelbrot/ips/hw/lpsc_clk_mandelbrot/src/ip_core/clk_mandelbrot/clk_mandelbrot_sim_netlist.vhdl
+-- Command     : write_vhdl -force -mode funcsim -rename_top clk_mandelbrot -prefix
+--               clk_mandelbrot_ clk_mandelbrot_sim_netlist.vhdl
 -- Design      : clk_mandelbrot
 -- Purpose     : This VHDL netlist is a functional simulation representation of the design and should not be modified or
 --               synthesized. This netlist cannot be used for SDF annotated simulation.
@@ -14,16 +14,16 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 library UNISIM;
 use UNISIM.VCOMPONENTS.ALL;
-entity clk_mandelbrot_clk_wiz is
+entity clk_mandelbrot_clk_mandelbrot_clk_wiz is
   port (
     ClkMandelxCO : out STD_LOGIC;
     reset : in STD_LOGIC;
     PllLockedxSO : out STD_LOGIC;
     ClkSys100MhzxCI : in STD_LOGIC
   );
-end clk_mandelbrot_clk_wiz;
+end clk_mandelbrot_clk_mandelbrot_clk_wiz;
 
-architecture STRUCTURE of clk_mandelbrot_clk_wiz is
+architecture STRUCTURE of clk_mandelbrot_clk_mandelbrot_clk_wiz is
   signal ClkMandelxCO_clk_mandelbrot : STD_LOGIC;
   signal ClkSys100MhzxCI_clk_mandelbrot : STD_LOGIC;
   signal clkfbout_buf_clk_mandelbrot : STD_LOGIC;
@@ -82,7 +82,7 @@ mmcm_adv_inst: unisim.vcomponents.MMCME2_ADV
       CLKFBOUT_USE_FINE_PS => false,
       CLKIN1_PERIOD => 10.000000,
       CLKIN2_PERIOD => 0.000000,
-      CLKOUT0_DIVIDE_F => 10.000000,
+      CLKOUT0_DIVIDE_F => 12.500000,
       CLKOUT0_DUTY_CYCLE => 0.500000,
       CLKOUT0_PHASE => 0.000000,
       CLKOUT0_USE_FINE_PS => false,
@@ -178,7 +178,7 @@ end clk_mandelbrot;
 
 architecture STRUCTURE of clk_mandelbrot is
 begin
-inst: entity work.clk_mandelbrot_clk_wiz
+inst: entity work.clk_mandelbrot_clk_mandelbrot_clk_wiz
      port map (
       ClkMandelxCO => ClkMandelxCO,
       ClkSys100MhzxCI => ClkSys100MhzxCI,

@@ -31,10 +31,10 @@ set_property -dict {PACKAGE_PIN Y13 IOSTANDARD LVCMOS25} [get_ports {LedxDO[7]}]
 
 ## Buttons
 #set_property -dict {PACKAGE_PIN B22 IOSTANDARD LVCMOS12} [get_ports BtnCxSI]
-#set_property -dict { PACKAGE_PIN D22 IOSTANDARD LVCMOS12 } [get_ports { BtnDxSI }]; #IO_L22N_T3_16 Sch=btnd
+set_property -dict {PACKAGE_PIN D22 IOSTANDARD LVCMOS12} [get_ports BtnD_s]
 #set_property -dict { PACKAGE_PIN C22 IOSTANDARD LVCMOS12 } [get_ports { BtnLxSI }]; #IO_L20P_T3_16 Sch=btnl
 #set_property -dict { PACKAGE_PIN D14 IOSTANDARD LVCMOS12 } [get_ports { BtnRxSI }]; #IO_L6P_T0_16 Sch=btnr
-#set_property -dict { PACKAGE_PIN F15 IOSTANDARD LVCMOS12 } [get_ports { BtnUxSI }]; #IO_0_16 Sch=btnu
+set_property -dict {PACKAGE_PIN F15 IOSTANDARD LVCMOS12} [get_ports BtnU_s]
 set_property -dict {PACKAGE_PIN G4 IOSTANDARD LVCMOS15} [get_ports ResetxRNI]
 
 ## Buttons for reset
@@ -307,4 +307,5 @@ set_property -dict {PACKAGE_PIN AB3 IOSTANDARD TMDS_33} [get_ports {HdmiTxPxDO[2
 #set_property -dict { PACKAGE_PIN A15   IOSTANDARD LVCMOS12 } [get_ports { fmc_la_p[32] }]; #IO_L9P_T1_DQS_16 Sch=fmc_la_p[32]
 #set_property -dict { PACKAGE_PIN F14   IOSTANDARD LVCMOS12 } [get_ports { fmc_la_n[33] }]; #IO_L1N_T0_16 Sch=fmc_la_n[33]
 #set_property -dict { PACKAGE_PIN F13   IOSTANDARD LVCMOS12 } [get_ports { fmc_la_p[33] }]; #IO_L1P_T0_16 Sch=fmc_la_p[33]
+
 

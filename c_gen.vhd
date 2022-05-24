@@ -28,7 +28,7 @@ use UNISIM.vcomponents.all;
 entity c_gen is
 
     generic (
-        C_FXP_SIZE   : integer := 16;
+        C_FXP_SIZE   : integer := 18;
         C_X_SIZE     : integer := 1024;
         C_Y_SIZE     : integer := 600;
         C_SCREEN_RES : integer := 11);
@@ -76,10 +76,10 @@ architecture behavioral of c_gen is
 
     -- Complex constants
     -- Zoom 0
-    constant C_TOP_LEFT_RE_0 : std_logic_vector((C_FXP_SIZE - 1) downto 0) := "1110000000000000";
-    constant C_TOP_LEFT_IM_0 : std_logic_vector((C_FXP_SIZE - 1) downto 0) := "0001000000000000";
-    constant C_INC_RE_0      : std_logic_vector((C_FXP_SIZE - 1) downto 0) := "0000000000010000";
-    constant C_INC_IM_0      : std_logic_vector((C_FXP_SIZE - 1) downto 0) := "0000000000001110";
+    constant C_TOP_LEFT_RE_0 : std_logic_vector((C_FXP_SIZE - 1) downto 0) := "111110000000000000";-- -1.5:000110000000000000/C1:111001111111111111/ C2:
+    constant C_TOP_LEFT_IM_0 : std_logic_vector((C_FXP_SIZE - 1) downto 0) := "000010000000000000"; -- 0.5
+    constant C_INC_RE_0      : std_logic_vector((C_FXP_SIZE - 1) downto 0) := "000000000000001111";
+    constant C_INC_IM_0      : std_logic_vector((C_FXP_SIZE - 1) downto 0) := "000000000000100000";
     -- Zoom 1
     constant C_TOP_LEFT_RE_1 : std_logic_vector((C_FXP_SIZE - 1) downto 0) := "1110000000000000";
     constant C_TOP_LEFT_IM_1 : std_logic_vector((C_FXP_SIZE - 1) downto 0) := "0001000000000000";
