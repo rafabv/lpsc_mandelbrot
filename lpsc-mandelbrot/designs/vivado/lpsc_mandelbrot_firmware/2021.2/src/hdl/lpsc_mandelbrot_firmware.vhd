@@ -103,7 +103,7 @@ architecture arch of lpsc_mandelbrot_firmware is
     constant STEPY                              : std_logic_vector(17 downto 0):= "000000000000110111";
     constant C_TOP_LEFT_RE_c                    : std_logic_vector(17 downto 0):= "111000000000000000"; -- val : -2
     constant C_TOP_LEFT_IM_c                    : std_logic_vector(17 downto 0):= "000100000000000000"; -- val : 1
-    constant N_ITER                             : integer := 500;
+    constant N_ITER                             : integer := 100;
     
 
     -- Components
@@ -275,6 +275,7 @@ architecture arch of lpsc_mandelbrot_firmware is
     type fsm is (idle, iteration,write_mem);
     signal state                : fsm:= idle;
     signal compt_iter_s         : integer:=0;
+    signal compt_iter_vec_s     : std_logic_vector(8 downto 0);
     signal we_s                 : std_logic:= '0';
     signal val_4                : std_logic_vector(17 downto 0):="010000000000000000";
     
@@ -375,9 +376,9 @@ begin
     signal wea_s : std_logic_vector (0 downto 0):= (others => '0');
     
     begin  -- block VgaHdmiToFpgaUserCDCxB
-         --wea_s(0) <= PllLockedxD(0) and we_s;
+         wea_s(0) <= PllLockedxD(0) and we_s;
          --wea_s(0) <= PllLockedxS;
-         wea_s(0) <= we_s;
+         --wea_s(0) <= we_s;
          
          BramVideoMemoryxI : bram_video_memory_wauto_dauto_rdclk1_wrclk1
              port map (
@@ -513,7 +514,8 @@ begin
                                 we_s <= '1';
                                 next_val_s <= '0';
                                 BramVideoMemoryWriteAddrxD <= y_screen_s & x_screen_s;
-                                BramVideoMemoryWriteDataxD <= std_logic_vector(to_unsigned(compt_iter_s, BramVideoMemoryWriteDataxD'length));
+                                compt_iter_vec_s <= std_logic_vector(to_unsigned(compt_iter_s*2, BramVideoMemoryWriteDataxD'length));
+                                BramVideoMemoryWriteDataxD <= compt_iter_vec_s(8 downto 3)&"011";
                                 
                                 state <= write_mem;
                             end if;
