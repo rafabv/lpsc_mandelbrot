@@ -106,20 +106,20 @@ architecture arch of lpsc_mandelbrot_firmware is
     constant C_TOP_LEFT_RE0_c                    : std_logic_vector(17 downto 0):= "111000000000000000"; -- val : -2
     constant C_TOP_LEFT_IM0_c                    : std_logic_vector(17 downto 0):= "000100000000000000"; -- val : 1
     -- zoom 1
-    constant STEPX1                              : std_logic_vector(17 downto 0):= "000000000000001111";
-    constant STEPY1                              : std_logic_vector(17 downto 0):= "000000000000100000";
-    constant C_TOP_LEFT_RE1_c                    : std_logic_vector(17 downto 0):= "111110000000000000";
+    constant STEPX1                              : std_logic_vector(17 downto 0):= "000000000000010111";
+    constant STEPY1                              : std_logic_vector(17 downto 0):= "000000000000011100";
+    constant C_TOP_LEFT_RE1_c                    : std_logic_vector(17 downto 0):= "111010100000000000";
     constant C_TOP_LEFT_IM1_c                    : std_logic_vector(17 downto 0):= "000010000000000000";
     -- zoom 2
-    constant STEPX2                              : std_logic_vector(17 downto 0):= "000000000000001111";
-    constant STEPY2                              : std_logic_vector(17 downto 0):= "000000000000100000";
-    constant C_TOP_LEFT_RE2_c                    : std_logic_vector(17 downto 0):= "111110000000000000";
-    constant C_TOP_LEFT_IM2_c                    : std_logic_vector(17 downto 0):= "000010000000000000";
+    constant STEPX2                              : std_logic_vector(17 downto 0):= "000000000000000101";
+    constant STEPY2                              : std_logic_vector(17 downto 0):= "000000000000000100";
+    constant C_TOP_LEFT_RE2_c                    : std_logic_vector(17 downto 0):= "111100011000000000";
+    constant C_TOP_LEFT_IM2_c                    : std_logic_vector(17 downto 0):= "000000101000000000";
     -- zoom 3
-    constant STEPX3                              : std_logic_vector(17 downto 0):= "000000000000001111";
-    constant STEPY3                              : std_logic_vector(17 downto 0):= "000000000000100000";
-    constant C_TOP_LEFT_RE3_c                    : std_logic_vector(17 downto 0):= "111110000000000000";
-    constant C_TOP_LEFT_IM3_c                    : std_logic_vector(17 downto 0):= "000010000000000000";
+    constant STEPX3                              : std_logic_vector(17 downto 0):= "000000000000000010";
+    constant STEPY3                              : std_logic_vector(17 downto 0):= "000000000000000011";
+    constant C_TOP_LEFT_RE3_c                    : std_logic_vector(17 downto 0):= "111100110100000000";
+    constant C_TOP_LEFT_IM3_c                    : std_logic_vector(17 downto 0):= "000000011100000000";
    
     constant N_ITER                             : integer := 200;
     
@@ -541,10 +541,26 @@ begin
         
       
         
-        stepx_s <= STEPX1 when select_s = '1' else STEPX0;
-        stepy_s <= STEPY1 when select_s = '1' else STEPY0;
-        c_top_left_re_s <= C_TOP_LEFT_RE1_c when select_s = '1' else C_TOP_LEFT_RE0_c;
-        c_top_left_im_s <= C_TOP_LEFT_IM1_c when select_s = '1' else C_TOP_LEFT_IM0_c;
+        stepx_s <= STEPX0 when compt_zoom_s = 0 else 
+                   STEPX1 when compt_zoom_s = 1 else 
+                   STEPX2 when compt_zoom_s = 2 else 
+                   STEPX3 when compt_zoom_s = 3 else 
+                   STEPX0;
+        stepy_s <= STEPY0 when compt_zoom_s = 0 else 
+                   STEPY1 when compt_zoom_s = 1 else 
+                   STEPY2 when compt_zoom_s = 2 else 
+                   STEPY3 when compt_zoom_s = 3 else 
+                   STEPY0;
+        c_top_left_re_s <= C_TOP_LEFT_RE0_c when compt_zoom_s = 0 else 
+                           C_TOP_LEFT_RE1_c when compt_zoom_s = 1 else 
+                           C_TOP_LEFT_RE2_c when compt_zoom_s = 2 else 
+                           C_TOP_LEFT_RE3_c when compt_zoom_s = 3 else 
+                           C_TOP_LEFT_RE0_c;
+        c_top_left_im_s <= C_TOP_LEFT_IM0_c when compt_zoom_s = 0 else 
+                           C_TOP_LEFT_IM1_c when compt_zoom_s = 1 else
+                           C_TOP_LEFT_IM2_c when compt_zoom_s = 2 else 
+                           C_TOP_LEFT_IM3_c when compt_zoom_s = 3 else  
+                           C_TOP_LEFT_IM0_c;
         
         comparator_s <= '1' when (somme_diverg(17 downto 14) < val_4(17 downto 14)) else '0';
         --BramVideoMemoryWriteDataxD <= "000101111";
@@ -555,10 +571,15 @@ begin
             --BramVideoMemoryWriteAddrxD <= std_logic_vector(unsigned(BramVideoMemoryWriteAddrxD) + 1);
                 if reset_s ='1' then
                     state <= idle; 
-                    select_s <= '0';               
+                    select_s <= '0';     
+                    compt_zoom_s <= 0;          
                 else
                     -- maintien des pulses
-                    if BtnD_pulse_s = '1' then
+                    if BtnD_pulse_s = '1' and compt_zoom_s < 3 then
+                        compt_zoom_s <= compt_zoom_s + 1;
+                        select_s <= not select_s;
+                    elsif BtnU_pulse_s = '1' and compt_zoom_s >0 then
+                        compt_zoom_s <= compt_zoom_s - 1;
                         select_s <= not select_s;
                     end if;
                     CASE state IS
